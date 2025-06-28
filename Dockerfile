@@ -17,11 +17,13 @@ FROM golang:1.24.4-alpine3.22
 WORKDIR /app
 
 # Copy required files
-COPY --from=builder /app/main .
+COPY ./config/credentials.yml.enc config/credentials.yml.enc
 COPY ./start.sh /app/start.sh
+
+COPY --from=builder /app/main .
 
 ENV GIN_MODE=release
 ENV TZ=Asia/Bangkok
-EXPOSE 8080
+EXPOSE 3000
 CMD ["/app/main"]
 ENTRYPOINT [ "/app/start.sh" ]
