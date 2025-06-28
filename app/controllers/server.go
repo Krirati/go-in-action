@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"learning/app/models"
 	"learning/config"
 
 	"github.com/gin-gonic/gin"
@@ -8,16 +9,18 @@ import (
 
 type Server struct {
 	Router *gin.Engine
-    Config config.Config
+	Config config.Config
+	Store  models.Store
 }
 
-func New(config *config.Config) *Server {
+func New(config *config.Config, store models.Store) *Server {
 	router := gin.Default()
 	server := &Server{
 		Router: router,
-        Config: *config,
+		Config: *config,
+		Store:  store,
 	}
-    server.SetupRoutes()
+	server.SetupRoutes()
 	return server
 }
 
