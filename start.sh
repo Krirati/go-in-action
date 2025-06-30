@@ -10,7 +10,7 @@ if [ ! -z "$MASTER_KEY" ]; then
 fi
 
 echo "run db migration"
-goose --dir=db/migrate -allow-missing postgres $DB_URI up
+goose --dir=db/migrate -allow-missing postgres "$DB_URI" up
 
 echo "start server"
 exec "$@"
